@@ -1,0 +1,19 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package facade;
+
+/**
+ *
+ * @author USER
+ */
+public class UserValidator {
+
+    public boolean isValidUser(String user) {
+
+        System.out.println("[VALIDACION] Usuario verificado: " + user);
+
+        return true;
+    }
+}
