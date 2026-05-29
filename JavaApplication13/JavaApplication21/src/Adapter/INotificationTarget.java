@@ -8,6 +8,8 @@ package Adapter;
  *
  * @author USER
  */
+
+
 public interface INotificationTarget {
     void sendNotification(String message, String recipient);
 }

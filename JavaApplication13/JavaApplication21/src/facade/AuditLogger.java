@@ -11,8 +11,6 @@ package facade;
 public class AuditLogger {
 
     public void logActivity(String message) {
-
         System.out.println("[LOG] " + message);
-
     }
 }

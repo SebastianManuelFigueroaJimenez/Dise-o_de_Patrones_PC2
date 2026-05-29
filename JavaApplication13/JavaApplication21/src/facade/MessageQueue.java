@@ -11,9 +11,6 @@ package facade;
 public class MessageQueue {
 
     public void enqueue(String message) {
-
-        System.out.println("[QUEUE] Mensaje agregado correctamente.");
-
+        System.out.println("[QUEUE] Mensaje encolado correctamente.");
     }
 }
-

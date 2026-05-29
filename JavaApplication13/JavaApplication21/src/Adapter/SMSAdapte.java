@@ -11,16 +11,14 @@ package Adapter;
 
 public class SMSAdapte implements INotificationTarget {
 
-    private LegacySMSProvider legacySMSProvider;
+    private final LegacySMSProvider legacySMSProvider;
 
-    public SMSAdapte (LegacySMSProvider legacySMSProvider) {
+    public SMSAdapte(LegacySMSProvider legacySMSProvider) {
         this.legacySMSProvider = legacySMSProvider;
     }
 
     @Override
     public void sendNotification(String message, String recipient) {
-
         legacySMSProvider.sendMassiveSMS(recipient, message);
-
     }
 }

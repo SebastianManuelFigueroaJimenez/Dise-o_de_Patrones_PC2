@@ -10,27 +10,22 @@ package composite;
  */
 public class Product implements IShippingComponent {
 
-    private String name;
-    private double weight;
+    private final String name;
+    private final double shippingCost;
 
-    public Product(String name, double weight) {
+    public Product(String name, double shippingCost) {
         this.name = name;
-        this.weight = weight;
+        this.shippingCost = shippingCost;
     }
 
     @Override
     public void showDetails() {
-
-        System.out.printf(
-            "   %-25s | Peso: %5.2f kg%n",
-            name,
-            weight
-    );
-
+        System.out.printf("      [Producto] %-25s | Costo envio: S/ %5.2f%n",
+                name, shippingCost);
     }
 
     @Override
-    public double calculateWeight() {
-        return weight;
+    public double calculateShippingCost() {
+        return shippingCost;
     }
 }

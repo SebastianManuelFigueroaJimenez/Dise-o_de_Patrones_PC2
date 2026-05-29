@@ -8,8 +8,9 @@ package decorator;
  *
  * @author USER
  */
-public class StatsLoggingDecorator
-        extends ChannelDecorator {
+public class StatsLoggingDecorator extends ChannelDecorator {
+
+    private static int messageCount = 0;
 
     public StatsLoggingDecorator(IMessageChannel channel) {
         super(channel);
@@ -17,11 +18,9 @@ public class StatsLoggingDecorator
 
     @Override
     public void send(String message) {
-
-        System.out.println("[LOG] Longitud mensaje: "
-                + message.length());
-
+        messageCount++;
+        System.out.println("[ESTADISTICAS] Mensaje #" + messageCount
+                + " | Longitud original: " + message.length() + " chars");
         super.send(message);
-
     }
 }

@@ -8,8 +8,7 @@ package decorator;
  *
  * @author USER
  */
-public class CompressionDecorator
-        extends ChannelDecorator {
+public class CompressionDecorator extends ChannelDecorator {
 
     public CompressionDecorator(IMessageChannel channel) {
         super(channel);
@@ -17,11 +16,10 @@ public class CompressionDecorator
 
     @Override
     public void send(String message) {
-
-        String compressed =
-                "[COMPRIMIDO] " + message;
-
-        super.send(compressed);
-
+        String compressed = message.replaceAll("([aeiouAEIOU])\\1+", "$1");
+        int savings = message.length() - compressed.length();
+        System.out.println("[COMPRESION] Caracteres reducidos: " + savings
+                + " | Longitud final: " + compressed.length());
+        super.send("[COMP:" + compressed + "]");
     }
 }

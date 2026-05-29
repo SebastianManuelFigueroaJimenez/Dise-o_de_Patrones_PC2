@@ -13,124 +13,93 @@ public class NewMain {
 
     public static void main(String[] args) {
 
-        // ==================================================
-        // ADAPTER
-        // ==================================================
-
+        // ══════════════════════════════════════════════════
+        // PATRON ADAPTER
+        // ══════════════════════════════════════════════════
         System.out.println("\n==================================================");
-        System.out.println("                 PATRON ADAPTER");
+        System.out.println("              PATRON ADAPTER");
         System.out.println("==================================================");
 
-        LegacySMSProvider legacyProvider =
-                new LegacySMSProvider();
-
-        INotificationTarget smsAdapter =
-                new SMSAdapte(legacyProvider);
+        LegacySMSProvider legacyProvider = new LegacySMSProvider();
+        INotificationTarget smsAdapter   = new SMSAdapte(legacyProvider);
 
         smsAdapter.sendNotification(
-                "Hola cliente, su pedido fue enviado.",
-                "999888777"
+                "Hola cliente, su pedido ha sido despachado.",
+                "+51999888777"
         );
 
-
-
-        // ==================================================
-        // FACADE
-        // ==================================================
-
+        // ══════════════════════════════════════════════════
+        // PATRON FACADE
+        // ══════════════════════════════════════════════════
         System.out.println("\n==================================================");
-        System.out.println("                  PATRON FACADE");
+        System.out.println("              PATRON FACADE");
         System.out.println("==================================================");
 
-        NotificationFacade facade =
-                new NotificationFacade(smsAdapter);
+        NotificationFacade facade = new NotificationFacade(smsAdapter);
 
         facade.sendSecureNotification(
-                "Ali",
-                "Su compra ha sido confirmada",
-                "999888777"
+                "Carlos Rios",
+                "Su compra ha sido confirmada. Codigo: #ORD-2026",
+                "+51999888777"
         );
 
-
-
-        // ==================================================
-        // COMPOSITE
-        // ==================================================
-
+        // ══════════════════════════════════════════════════
+        // PATRON COMPOSITE
+        // ══════════════════════════════════════════════════
         System.out.println("\n==================================================");
-        System.out.println("                 PATRON COMPOSITE");
+        System.out.println("              PATRON COMPOSITE");
         System.out.println("==================================================");
 
+        Product laptop   = new Product("Laptop Dell XPS",   15.00);
+        Product mouse    = new Product("Mouse Inalambrico",   2.50);
+        Product keyboard = new Product("Teclado Mecanico",    3.80);
+        Product usb      = new Product("Hub USB-C",           1.20);
+        Product cable    = new Product("Cable HDMI 2m",       0.90);
 
+        Bag accessoryBag = new Bag("Bolsa de Accesorios");
+        accessoryBag.addComponent(usb);
+        accessoryBag.addComponent(cable);
 
-        Product laptop =
-                new Product("Laptop Dell", 2.50);
+        Box electronicsBox = new Box("Caja Electronica");
+        electronicsBox.addComponent(laptop);
+        electronicsBox.addComponent(mouse);
 
-        Product mouse =
-                new Product("Mouse Inalambrico", 0.30);
+        Box peripheralsBox = new Box("Caja Perifericos");
+        peripheralsBox.addComponent(keyboard);
+        peripheralsBox.addComponent(accessoryBag);
 
-        Product keyboard =
-                new Product("Teclado Mecanico", 0.80);
-
-
-
-        Box electronicBox =
-                new Box("Caja Electronica");
-
-        electronicBox.addComponent(laptop);
-        electronicBox.addComponent(mouse);
-
-
-
-        Box accessoryBox =
-                new Box("Caja Accesorios");
-
-        accessoryBox.addComponent(keyboard);
-
-
-
-        MasterBox shipment =
-                new MasterBox("Pedido #1001");
-
-        shipment.addComponent(electronicBox);
-        shipment.addComponent(accessoryBox);
-
-
+        MasterBox shipment = new MasterBox("Pedido #ORD-2026-001");
+        shipment.addComponent(electronicsBox);
+        shipment.addComponent(peripheralsBox);
 
         shipment.showDetails();
 
-
-
-        // ==================================================
-        // DECORATOR
-        // ==================================================
-
+        // ══════════════════════════════════════════════════
+        // PATRON DECORATOR
+        // Orden: StatsLogging > Compression > Encryption > BasicEmail
+        // ══════════════════════════════════════════════════
         System.out.println("\n==================================================");
-        System.out.println("                 PATRON DECORATOR");
+        System.out.println("              PATRON DECORATOR");
         System.out.println("==================================================");
 
         IMessageChannel channel =
-                new StatsLoggingDecorator(
-                        new CompressionDecorator(
-                                new EncryptionDecorator(
-                                        new BasicEmailChannel()
-                                )
-                        )
-                );
+            new StatsLoggingDecorator(
+                new CompressionDecorator(
+                    new EncryptionDecorator(
+                        new BasicEmailChannel()
+                    )
+                )
+            );
 
-        channel.send(
-                "Bienvenido al sistema de notificaciones"
-        );
+        System.out.println("--- Todos los decoradores apilados ---");
+        channel.send("Bienvenido al sistema de notificaciones omnicanal");
 
-
-
-        // ==================================================
-        // FINAL
-        // ==================================================
+        System.out.println("\n--- Solo encriptacion ---");
+        IMessageChannel simple = new EncryptionDecorator(new BasicEmailChannel());
+        simple.send("Mensaje con solo encriptacion");
 
         System.out.println("\n==================================================");
-        System.out.println("           EJECUCION COMPLETADA");
-        System.out.println("==================================================");
-
+        System.out.println("        EJECUCION COMPLETADA - CASO 2");
+        System.out.println("==================================================\n");
     }
 }

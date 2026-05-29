@@ -8,50 +8,38 @@ package composite;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Composite: caja que puede contener productos u otras cajas.
+ */
 public class Box implements IShippingComponent {
 
-    protected String name;
-
-    protected List<IShippingComponent> components;
+    protected final String name;
+    protected final List<IShippingComponent> components;
 
     public Box(String name) {
-
         this.name = name;
-
-        components = new ArrayList<>();
-
+        this.components = new ArrayList<>();
     }
 
     public void addComponent(IShippingComponent component) {
-
         components.add(component);
-
     }
 
     @Override
     public void showDetails() {
-
-       
-    System.out.println("\n+ Caja: " + name);
-
-    for (IShippingComponent component : components) {
-
-        component.showDetails();
-
-    }
+        System.out.println("   [Caja] " + name
+                + "  -> Costo total: S/ " + String.format("%.2f", calculateShippingCost()));
+        for (IShippingComponent c : components) {
+            c.showDetails();
+        }
     }
 
     @Override
-    public double calculateWeight() {
-
+    public double calculateShippingCost() {
         double total = 0;
-
-        for (IShippingComponent component : components) {
-
-            total += component.calculateWeight();
-
+        for (IShippingComponent c : components) {
+            total += c.calculateShippingCost();
         }
-
         return total;
     }
 }

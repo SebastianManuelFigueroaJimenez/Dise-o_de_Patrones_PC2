@@ -9,6 +9,5 @@ package decorator;
  * @author USER
  */
 public interface IMessageChannel {
-
     void send(String message);
 }

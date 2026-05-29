@@ -8,11 +8,10 @@ package facade;
  *
  * @author USER
  */
+
 public class DataEncryptor {
-  
+
     public String encryptData(String data) {
-
         return "[ENCRIPTADO] " + data;
-
     }
 }

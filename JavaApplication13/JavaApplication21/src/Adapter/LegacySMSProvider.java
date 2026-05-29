@@ -11,9 +11,7 @@ package Adapter;
 public class LegacySMSProvider {
 
     public void sendMassiveSMS(String phone, String textBody) {
-
-        System.out.println("[LegacySMSProvider] SMS enviado a "
-                + phone + " -> " + textBody);
-
+        System.out.println("[LegacySMSProvider] SMS masivo enviado a: "
+                + phone + " | Contenido: " + textBody);
     }
 }

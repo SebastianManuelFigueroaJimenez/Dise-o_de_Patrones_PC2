@@ -8,21 +8,16 @@ package decorator;
  *
  * @author USER
  */
-public abstract class ChannelDecorator
-        implements IMessageChannel {
+public abstract class ChannelDecorator implements IMessageChannel {
 
-    protected IMessageChannel channel;
+    protected final IMessageChannel channel;
 
     public ChannelDecorator(IMessageChannel channel) {
-
         this.channel = channel;
-
     }
 
     @Override
     public void send(String message) {
-
         channel.send(message);
-
-    }   
+    }
 }

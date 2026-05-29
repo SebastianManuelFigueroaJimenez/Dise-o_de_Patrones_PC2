@@ -11,9 +11,7 @@ package facade;
 public class UserValidator {
 
     public boolean isValidUser(String user) {
-
         System.out.println("[VALIDACION] Usuario verificado: " + user);
-
         return true;
     }
 }

@@ -12,9 +12,6 @@ public class BasicEmailChannel implements IMessageChannel {
 
     @Override
     public void send(String message) {
-
-        System.out.println("[EMAIL]");
-        System.out.println("Mensaje enviado: " + message);
-
-    } 
+        System.out.println("[EMAIL BASICO] Mensaje entregado: " + message);
+    }
 }

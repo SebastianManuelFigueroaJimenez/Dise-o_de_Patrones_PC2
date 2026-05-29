@@ -12,6 +12,5 @@ public interface IShippingComponent {
 
     void showDetails();
 
-    double calculateWeight();
-
+    double calculateShippingCost();
 }
